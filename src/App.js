@@ -3,6 +3,14 @@ import Header from "./components/Header/Header";
 import ResultsForm from "./components/ResultsForm/ResultsForm";
 import ResultsTable from "./components/ResultsTable/ResultsTable";
 
+/*
+Test input:
+    savings: 10000,
+    contribution: 1200,
+    return: 7,
+    duration: 10,
+*/
+
 function App() {
   const [userInput, setUserInput] = useState(null);
 
@@ -15,6 +23,7 @@ function App() {
   const yearlyData = [];
 
   if (userInput) { // We need to check if the object has been defined, else we'll try to access properties on a null variable
+    console.log('user input to app: ', userInput);
     let currentSavings = +userInput.savings;
     const yearlyContribution = +userInput.contribution;
     const expectedReturn = +userInput.return / 100;

@@ -24,11 +24,21 @@ const ResultsForm = (props) => {
 
     const submitHandler = (event) => {
         event.preventDefault();
-        props.onCalculate(userInput);
+        if (userInput.duration >= 1) {
+            props.onCalculate(userInput);
+        } else {
+            console.log('Nothing was entered');
+        }
     }
 
     const resetHandler = () => {
-        setUserInput(initialUserInput);
+        setUserInput({
+            savings: '',
+            contribution: '',
+            return: '',
+            duration: '',
+        });
+        props.onCalculate(null);
     }
 
     return (
@@ -36,11 +46,11 @@ const ResultsForm = (props) => {
             <div className={classes['input-group']}>
             <p>
                 <label htmlFor="current-savings">Current Savings ($)</label>
-                <input type="number" id="current-savings" value={userInput.savings} onChange={(event) => inputChangeHandler('savings', event.target.value)} />
+                <input type="number" min='0' id="current-savings" value={userInput.savings} onChange={(event) => inputChangeHandler('savings', event.target.value)} />
             </p>
             <p>
                 <label htmlFor="yearly-contribution">Yearly Savings ($)</label>
-                <input type="number" id="yearly-contribution" value={userInput.contribution} onChange={(event) => inputChangeHandler('contribution', event.target.value)} />
+                <input type="number" min='0' id="yearly-contribution" value={userInput.contribution} onChange={(event) => inputChangeHandler('contribution', event.target.value)} />
             </p>
             </div>
             <div className={classes['input-group']}>
@@ -48,11 +58,11 @@ const ResultsForm = (props) => {
                 <label htmlFor="expected-return">
                 Expected Interest (%, per year)
                 </label>
-                <input type="number" id="expected-return" value={userInput.return} onChange={(event) => inputChangeHandler('return', event.target.value)} />
+                <input type="number" min='0' id="expected-return" value={userInput.return} onChange={(event) => inputChangeHandler('return', event.target.value)} />
             </p>
             <p>
                 <label htmlFor="duration">Investment Duration (years)</label>
-                <input type="number" id="duration" value={userInput.duration} onChange={(event) => inputChangeHandler('duration', event.target.value)} />
+                <input type="number" min='0' id="duration" value={userInput.duration} onChange={(event) => inputChangeHandler('duration', event.target.value)} />
             </p>
             </div>
             <p className={classes.actions}>
